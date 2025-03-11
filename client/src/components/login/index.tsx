@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
-import Cookies from 'js-cookie';
+import { loginService } from '../../services/loginService';
 
 
 import { useNavigate } from "react-router-dom";
@@ -12,14 +12,25 @@ import { useNavigate } from "react-router-dom";
 const Login = ({setIsAuthenticated}) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('')
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();  
-    const res = await fetch('http://localhost:8080/login', {credentials: "include"})
-    const data = await res.json();
-    const token = Cookies.get("session-token");
-    setIsAuthenticated(!!token)
+    const formData = new FormData(e.currentTarget); 
+    if(!formData.get('username') || !formData.get('password')){
+        return setError('Login fields are required')
+    }
+    
+    setLoading(true)
+    // const {err, success, token} =  await loginService(data)       
+    const {err, data, token} =  await loginService(formData)       
+    setLoading(false)
+
+    if(err){                
+        return setError(err)
+    }
+    setIsAuthenticated(!!token)    
     console.log(data)
     navigate("/dashboard");
    
@@ -70,7 +81,7 @@ const Login = ({setIsAuthenticated}) => {
                         >
                             Login
                         </Button> 
-                        <label className={'w-full flex justify-center font-medium text-[darkred]'}>תנשמת תנשמת תנשמת, בלילה נושמת!!</label>
+                        <label className={'w-full flex justify-center font-medium text-[darkred]'}>{error}</label>
                     </div>
                 }   
               </div>                

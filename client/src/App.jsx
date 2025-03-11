@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Login from "./login";
+import Login from "./components/login";
 import { useState } from "react";
 
 function App() {  

@@ -14,11 +14,9 @@ app.use(cookieParser());
 app.use(express.json());
 
 
-app.get('/login',  async (req, res) => {   
-    try{ 
-
-
-
+app.post('/login',  async (req, res) => {   
+    try{  
+      // TODO             
       res.cookie("session-token", "123456", { httpOnly: false,  secure: false, sameSite: "Lax" });                
       return res.status(200).json({success: true, token: 'here', err: null });
 
