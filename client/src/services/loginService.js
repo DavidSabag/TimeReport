@@ -1,7 +1,8 @@
 import Cookies from 'js-cookie';
+const { VITE_API_URL } = import.meta.env;
 
 async function loginService(formdata) {
-    try {
+    try {          
         const options = {
             method: 'POST',
             headers: {
@@ -13,7 +14,7 @@ async function loginService(formdata) {
             }),
             credentials: "include"
         };        
-        const res = await fetch('http://localhost:8080/login', options)             
+        const res = await fetch(`${VITE_API_URL}/login`, options)             
         if (!res.ok) throw new Error(`Error fetching data with status: ${res.statusText}`);
         const token = Cookies.get("session-token");        
         
