@@ -4,24 +4,24 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 import Login from "./components/login";
-import { useState } from "react";
+import Dashboard from "./components/dashboard";
 
-function App() {  
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
+
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />            
-            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />            
-            <Route
-              path="/dashboard"
-              element={isAuthenticated ? <>this is protected</> : <Navigate to="/login" />}
-            />
-            
+          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route
+            path="/dashboard"
+            element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
+          />
         </Routes>
       </BrowserRouter>
     </>
