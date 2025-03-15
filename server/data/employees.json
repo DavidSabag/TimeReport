@@ -1,0 +1,52 @@
+[
+    {
+        "employeeId": "12343",
+        "firstName": "Ned",
+        "lastName": "Stark",
+        "role": "Lord of winterfall",
+        "manager": "Robert Bartheon",
+        "empManagerId": "77785",
+        "reports": [
+            {
+                "name": "Sansa Stark",
+                "date": "TODO",
+                "startTime": "TODO",
+                "endTime": "TODO"
+            }
+        ],
+        "userName": "nstark",
+        "password": "1234",
+        "premissionGroups": [
+            "employee",
+            "manager"
+        ]
+    },
+    {
+        "employeeId": "12342",
+        "firstName": "Jon",
+        "lastName": "Snow",
+        "role": "The king in the north",
+        "manager": "Ned Stark",
+        "empManagerId": "12343",
+        "reports": [],
+        "userName": "jstark",
+        "password": "12345",
+        "premissionGroups": [
+            "employee",
+            "manager"
+        ]
+    },
+    {
+        "employeeId": "12341",
+        "firstName": "Arya",
+        "lastName": "Stark",
+        "role": "Killing",
+        "manager": "Jon Snow",
+        "empManagerId": "12342",
+        "userName": "astark",
+        "password": "123456",
+        "premissionGroups": [
+            "employee"
+        ]
+    }
+]
