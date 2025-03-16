@@ -9,9 +9,10 @@ import Dashboard from "./components/dashboard";
 import { employeeDataReducer, initialState, EmployeeDataContext } from "./globalState"
 import { useReducer } from 'react';
 
+
+
 function App() {
   const [state, dispatch] = useReducer(employeeDataReducer, initialState);
-
 
   return (
     <EmployeeDataContext.Provider value={{ state, dispatch }}>

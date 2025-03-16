@@ -1,19 +1,9 @@
-import React, { useContext } from "react";
-import { EmployeeDataContext } from "../../../globalState";
-import { managerResponse } from "../../../services/managerResponse"
+import React from "react";
 import Report from "./report";
 
-const ReportsTable = () => {
-    const { state } = useContext(EmployeeDataContext);
-    const reports = state.employeeData.data?.[0]?.reports ?? null
+const ReportsTable = ({ state }) => {
+    const reports = state.employeeData.data.reports ?? null
 
-    const handleManagerResponse = async (e) => {
-        const response = e.target.name
-        const { success } = await managerResponse({ response })
-        console.log(success)
-
-
-    }
     return (
         <div className="h-[100%] mt-[50px]">
             <header className="font-[500] text-[21px] text-[#5f5b5b] mb-[3px] ml-[1px] flex flex-wrap">
@@ -24,9 +14,8 @@ const ReportsTable = () => {
                 {
                     reports?.length > 0 ?
                         reports.map(report => <Report
-                            key={report.date}
+                            key={report.employeeId}
                             {...report}
-                            handleManagerResponse={handleManagerResponse}
                         />) :
                         <p className="text-[#5f5b5b] font-[500] text-[21px] m-auto">No Reports Yet</p>
 

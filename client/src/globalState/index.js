@@ -18,8 +18,6 @@ const employeeDataReducer = (state, action) => {
     }
 };
 
-
-
 export {
     EmployeeDataContext,
     initialState,

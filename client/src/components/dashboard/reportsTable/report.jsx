@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from '@mui/material/Button';
+import { managerResponse } from "../../../services/managerResponse"
 
 
-const Report = ({ name, date, startTime, endTime, handleManagerResponse }) => {
+const Report = ({ employeeId, name, date, startTime, endTime }) => {
+
+    const [showResponseBtns, setShowResponseBtns] = useState(true)
+
+    const handleManagerResponse = async (e) => {
+        const response = e?.target?.name ?? null
+        const employeeId = e?.target?.id ?? null
+        const { success, data } = await managerResponse({ response, employeeId })
+        setShowResponseBtns(!success)
+        console.table(data)
+
+    }
 
 
     return (
@@ -23,22 +35,27 @@ const Report = ({ name, date, startTime, endTime, handleManagerResponse }) => {
                 <label className="font-[500]">End Time</label>
                 <label>{endTime}</label>
             </div>
-            <Button
-                className="w-[100px] h-[30px] !normal-case !bg-[#3bb33b] !shadow-none top-[7px]"
-                variant="contained"
-                name='approve'
-                onClick={handleManagerResponse}
-            >
-                Approve
-            </Button>
-            <Button
-                className="w-[100px] h-[30px] !normal-case !bg-[lightcoral] !shadow-none top-[7px]"
-                variant="contained"
-                name='reject'
-                onClick={handleManagerResponse}
-            >
-                Reject
-            </Button>
+            {showResponseBtns && <>
+                <Button
+                    className="w-[100px] h-[30px] !normal-case !bg-[#3bb33b] !shadow-none top-[7px]"
+                    variant="contained"
+                    name='approve'
+                    id={employeeId}
+                    onClick={handleManagerResponse}
+                >
+                    Approve
+                </Button>
+                <Button
+                    className="w-[100px] h-[30px] !normal-case !bg-[lightcoral] !shadow-none top-[7px]"
+                    variant="contained"
+                    name='reject'
+                    id={employeeId}
+                    onClick={handleManagerResponse}
+                >
+                    Reject
+                </Button>
+            </>
+            }
 
         </div>
     )

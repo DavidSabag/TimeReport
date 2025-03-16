@@ -6,14 +6,7 @@
         "role": "Lord of winterfall",
         "manager": "Robert Bartheon",
         "empManagerId": "77785",
-        "reports": [
-            {
-                "name": "Sansa Stark",
-                "date": "TODO",
-                "startTime": "TODO",
-                "endTime": "TODO"
-            }
-        ],
+        "reports": [],
         "userName": "nstark",
         "password": "1234",
         "premissionGroups": [
@@ -42,7 +35,7 @@
         "lastName": "Stark",
         "role": "Killing",
         "manager": "Jon Snow",
-        "empManagerId": "12342",
+        "empManagerId": "12343",
         "userName": "astark",
         "password": "123456",
         "premissionGroups": [

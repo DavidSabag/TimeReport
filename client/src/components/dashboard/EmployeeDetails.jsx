@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
-import { EmployeeDataContext } from "../../globalState"
+import React from "react";
 
-const EmployeeDetails = () => {
+const EmployeeDetails = ({ state }) => {
 
-    const { state } = useContext(EmployeeDataContext);
-    const { firstName, lastName, role, manager } = state.employeeData.data?.[0] ?? null
+    const { firstName, lastName, role, manager } = state.employeeData.data ?? null
 
     return (
         <div className="grid lg:grid-cols-[300px_300px] grid-cols-[300px] gap-2.5 p-2.5 [&>label]:text-[20px] text-start p-2.5 text-[#5f5b5b]">

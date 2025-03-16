@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -6,15 +6,23 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import { loginService } from '../../services/loginService';
 import { EmployeeDataContext } from "../../globalState"
-
-
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(EmployeeDataContext);
+  const { dispatch } = useContext(EmployeeDataContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const token = Cookies.get("session-token");
+    const data = localStorage.getItem("employeeData");
+    dispatch({ type: 'LOGIN', payload: !!token });
+    dispatch({ type: 'EMPLOYEEDATA', payload: JSON.parse(data) });
+    if (token) navigate("/dashboard");
+  }, [navigate])
+
 
 
   const handleSubmit = async (e) => {
@@ -31,8 +39,10 @@ const Login = () => {
     if (data.err) {
       return setError(data.err)
     }
+
     dispatch({ type: 'LOGIN', payload: !!token });
     dispatch({ type: 'EMPLOYEEDATA', payload: data });
+    localStorage.setItem('employeeData', JSON.stringify(data))
     navigate("/dashboard");
 
   }
