@@ -15,12 +15,11 @@ async function updateReport(reportData) {
 
         const { success, err } = await res.json();
 
-        if (err.name === "TokenExpiredError") {
+        if (err?.name === "TokenExpiredError") {
             Cookies.remove('session-token');
             window.location.reload();
         }
 
-        console.log(err)
         return {
             success,
             err

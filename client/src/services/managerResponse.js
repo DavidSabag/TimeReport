@@ -14,7 +14,7 @@ async function managerResponse(resData) {
         const res = await fetch(`${VITE_API_URL}/managerResponse`, options)
         const { success, data, err } = await res.json();
 
-        if (err.name === "TokenExpiredError") {
+        if (err?.name === "TokenExpiredError") {
             Cookies.remove('session-token');
             window.location.reload();
         }

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from '@mui/material/Button';
 import { managerResponse } from "../../../services/managerResponse"
 
-
-const Report = ({ employeeId, name, date, startTime, endTime }) => {
+const Report = ({ employeeId, name, date, startTime, endTime, status }) => {
 
     const [showResponseBtns, setShowResponseBtns] = useState(true)
 
@@ -35,7 +34,7 @@ const Report = ({ employeeId, name, date, startTime, endTime }) => {
                 <label className="font-[500]">End Time</label>
                 <label>{endTime}</label>
             </div>
-            {showResponseBtns && <>
+            {showResponseBtns && !status && <>
                 <Button
                     className="w-[100px] h-[30px] !normal-case !bg-[#3bb33b] !shadow-none top-[7px]"
                     variant="contained"
